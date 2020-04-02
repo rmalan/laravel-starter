@@ -6,7 +6,7 @@
                         <a href="{{ url('/') }}">BKD</a>
                     </div>
                     <ul class="sidebar-menu">
-                        <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/user-groups') }}"><i class="fas fa-user-friends"></i> <span>Grup Pengguna</span></a></li>
                     </ul>
                 </aside>

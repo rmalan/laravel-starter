@@ -31,14 +31,14 @@ $('[data-confirm]').each(function() {
     body: me_data[1],
     buttons: [
       {
-        text: me.data('confirm-text-yes') || 'Yes',
+        text: me.data('confirm-text-yes') || 'Ya',
         class: 'btn btn-danger btn-shadow',
         handler: function() {
           eval(me.data('confirm-yes'));
         }
       },
       {
-        text: me.data('confirm-text-cancel') || 'Cancel',
+        text: me.data('confirm-text-cancel') || 'Batal',
         class: 'btn btn-secondary',
         handler: function(modal) {
           $.destroyModal(modal);
