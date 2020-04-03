@@ -8,5 +8,6 @@
                     <ul class="sidebar-menu">
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
                         <li><a class="nav-link" href="{{ url('/user-groups') }}"><i class="fas fa-user-friends"></i> <span>Grup Pengguna</span></a></li>
+                        <li><a class="nav-link" href="{{ url('/users') }}"><i class="fas fa-users-cog"></i> <span>Pengguna</span></a></li>
                     </ul>
                 </aside>
