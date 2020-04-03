@@ -57,8 +57,8 @@
                                             <td>{{ $userGroup->name }}</td>
                                             <td>
                                                 <button class="btn btn-icon btn-warning edit-user-group" data-toggle="modal" data-target="#dataModal" data-id="{{ $userGroup->id }}"><i class="far fa-edit"></i></button>
-                                                <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete').submit();"><i class="fas fa-times"></i></button>
-                                                <form id="delete" action="{{ url('/user-groups/' .$userGroup->id) }}" method="post" style="display: none;">
+                                                <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $userGroup->id }}').submit();"><i class="fas fa-times"></i></button>
+                                                <form id="delete-{{ $userGroup->id }}" action="{{ url('/user-groups/' .$userGroup->id) }}" method="post" style="display: none;">
                                                     @method('delete')
                                                     @csrf
                                                 </form>
