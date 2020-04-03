@@ -21,7 +21,7 @@ class UserGroupsController extends Controller
         $userGroup->name = $request->nama;
         $userGroup->save();
 
-        return redirect('/user-groups')->with('message', 'Data berhasil ditambahkan');
+        return redirect('/user-groups')->with('message', 'Data telah ditambahkan');
     }
 
     public function edit($id)
@@ -39,7 +39,7 @@ class UserGroupsController extends Controller
         $userGroup->name = $request->nama;
         $userGroup->save();
 
-        return redirect('/user-groups')->with('message', 'Data berhasil diubah');
+        return redirect('/user-groups')->with('message', 'Data telah diubah');
     }
 
     public function destroy(UserGroup $userGroup)
