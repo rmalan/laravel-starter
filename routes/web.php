@@ -34,5 +34,3 @@ Route::delete('/user-groups/{userGroup}', 'UserGroupsController@destroy')->middl
 // Route::get('/users/{user}/edit', 'UsersController@edit');
 // Route::patch('/users/{user}', 'UsersController@update');
 Route::resource('/users', 'UsersController')->middleware('auth');
-
-Route::get('/home', 'HomeController@index')->name('home');
