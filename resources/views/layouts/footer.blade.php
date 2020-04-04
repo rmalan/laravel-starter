@@ -1,6 +1,6 @@
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; BKD {{ date('Y') }}
+                    Copyright &copy; Laravel CRUD {{ date('Y') }}
                 </div>
                 <div class="footer-right">
                 
