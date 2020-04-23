@@ -19,6 +19,12 @@ Auth::routes([
 ]);
 
 Route::get('/', 'DashboardController@index')->middleware('auth');
+// Permissions
+Route::get('/permissions', 'PermissionController@index')->middleware('auth');
+Route::post('/permissions', 'PermissionController@store')->middleware('auth');
+Route::get('/permissions/{id}', 'PermissionController@edit')->middleware('auth');
+Route::patch('/permissions/{permission}', 'PermissionController@update')->middleware('auth');
+Route::delete('/permissions/{permission}', 'PermissionController@destroy')->middleware('auth');
 // Users
 // Route::get('/users', 'UsersController@index');
 // Route::get('/users/create', 'UsersController@create');

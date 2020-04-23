@@ -9,6 +9,7 @@
                         <li class="menu-header">Dashboard</li>
                         <li><a class="nav-link" href="{{ url('/') }}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
                         <li class="menu-header"><i>Auth</i></li>
+                        <li><a class="nav-link" href="{{ url('/permissions') }}"><i class="fas fa-key"></i> <span>Permissions</span></a></li>
                         <li><a class="nav-link" href="{{ url('/users') }}"><i class="fas fa-users-cog"></i> <span>Users</span></a></li>
                     </ul>
                 </aside>
