@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $data['pageTitle'] = 'Pengguna';
+        $data['pageTitle'] = 'Users';
         $data['users'] = User::all();
 
         return view('users.index', $data);
@@ -29,8 +28,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        $data['pageTitle'] = 'Tambah Data Pengguna';
-        $data['userGroups'] = UserGroup::all();
+        $data['pageTitle'] = 'Tambah Data Users';
 
         return view('users.create', $data);
     }
@@ -48,7 +46,6 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'unique:users'],
             'username' => ['required', 'string', 'max:20', 'unique:users'],
             'password' => ['required', 'string', 'confirmed'],
-            'user_group' => 'required'
         ];
 
         $customMessages = [
@@ -59,13 +56,11 @@ class UsersController extends Controller
             'username.unique' => 'Nama pengguna telah digunakan!',
             'password.required' => 'Kata sandi belum diisi!',
             'password.confirmed' => 'Kata sandi tidak cocok!',
-            'user_group.required' => 'Grup pengguna belum dipilih!'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         User::create([
-            'group_id' => $request->user_group,
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
@@ -96,7 +91,6 @@ class UsersController extends Controller
     {
         $data['pageTitle'] = 'Ubah Data Pengguna';
         $data['user'] = $user;
-        $data['userGroups'] = UserGroup::all();
 
         return view('users.edit', $data);
     }
@@ -115,7 +109,6 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'unique:users,email,' .$user->id],
             'username' => ['required', 'string', 'max:20', 'unique:users,username,' .$user->id],
             'password' => ['required', 'string', 'confirmed'],
-            'user_group' => 'required'
         ];
 
         $customMessages = [
@@ -126,14 +119,12 @@ class UsersController extends Controller
             'username.unique' => 'Nama pengguna telah digunakan!',
             'password.required' => 'Kata sandi belum diisi!',
             'password.confirmed' => 'Kata sandi tidak cocok!',
-            'user_group.required' => 'Grup pengguna belum dipilih!'
         ];
 
         $this->validate($request, $rules, $customMessages);
 
         User::where('id', $user->id)
             ->update([
-                'group_id' => $request->user_group,
                 'name' => $request->name,
                 'email' => $request->email,
                 'username' => $request->username,

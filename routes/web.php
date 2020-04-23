@@ -19,12 +19,6 @@ Auth::routes([
 ]);
 
 Route::get('/', 'DashboardController@index')->middleware('auth');
-// User Groups
-Route::get('/user-groups', 'UserGroupsController@index')->middleware('auth');
-Route::post('/user-groups', 'UserGroupsController@store')->middleware('auth');
-Route::get('/user-groups/{id}', 'UserGroupsController@edit')->middleware('auth');
-Route::patch('/user-groups/{userGroup}', 'UserGroupsController@update')->middleware('auth');
-Route::delete('/user-groups/{userGroup}', 'UserGroupsController@destroy')->middleware('auth');
 // Users
 // Route::get('/users', 'UsersController@index');
 // Route::get('/users/create', 'UsersController@create');
@@ -33,4 +27,4 @@ Route::delete('/user-groups/{userGroup}', 'UserGroupsController@destroy')->middl
 // Route::delete('/users/{user}', 'UsersController@destroy');
 // Route::get('/users/{user}/edit', 'UsersController@edit');
 // Route::patch('/users/{user}', 'UsersController@update');
-Route::resource('/users', 'UsersController')->middleware('auth');
+Route::resource('/users', 'UserController')->middleware('auth');

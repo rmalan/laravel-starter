@@ -109,20 +109,6 @@
                                         <input name="password_confirmation" type="password" class="form-control pwstrength" data-indicator="pwindicator">
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label>Grup Pengguna</label>
-                                    <select class="form-control @error('user_group') is-invalid @enderror"" name="user_group">
-                                        @foreach ($userGroups as $userGroup)
-                                            <option value=""> -- Pilih Grup Pengguna --</option>
-                                            <option value="{{ $userGroup->id }}">{{ $userGroup->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('user_group')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="fas fa-save"></i> Simpan</button>
                                 </div>

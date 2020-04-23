@@ -40,7 +40,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label>Nama</label>
-                                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ $user->name }}">
+                                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name', $user->name) }}">
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -55,7 +55,7 @@
                                             <i class="fas fa-envelope"></i>
                                             </div>
                                         </div>
-                                        <input name="email" type="email" class="form-control  @error('email') is-invalid @enderror" value="{{ $user->email }}">
+                                        <input name="email" type="email" class="form-control  @error('email') is-invalid @enderror" value="{{ old('email', $user->email) }}">
                                         @error('email')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -71,7 +71,7 @@
                                             <i class="fas fa-user"></i>
                                             </div>
                                         </div>
-                                        <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" value="{{ $user->username }}">
+                                        <input name="username" type="text" class="form-control @error('username') is-invalid @enderror" value="{{ old('username', $user->username) }}">
                                         @error('username')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -109,20 +109,6 @@
                                         </div>
                                         <input name="password_confirmation" type="password" class="form-control pwstrength" data-indicator="pwindicator">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Grup Pengguna</label>
-                                    <select class="form-control @error('user_group') is-invalid @enderror"" name="user_group">
-                                        @foreach ($userGroups as $userGroup)
-                                            <option value=""> -- Pilih Grup Pengguna --</option>
-                                            <option value="{{ $userGroup->id }}" {{ $user->group_id == $userGroup->id ? 'selected' : '' }}>{{ $userGroup->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('user_group')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="fas fa-save"></i> Simpan</button>

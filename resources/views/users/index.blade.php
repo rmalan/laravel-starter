@@ -45,7 +45,6 @@
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>Nama Pengguna</th>
-                                            <th>Grup Pengguna</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -60,7 +59,6 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->username }}</td>
-                                            <td>{{ $user->userGroup->name }}</td>
                                             <td>
                                                 <a href="{{ url('/users/' .$user->id. '/edit') }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
                                                 <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $user->id }}').submit();"><i class="fas fa-times"></i></button>
