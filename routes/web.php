@@ -25,6 +25,8 @@ Route::post('/permissions', 'PermissionController@store')->middleware('auth');
 Route::get('/permissions/{id}', 'PermissionController@edit')->middleware('auth');
 Route::patch('/permissions/{permission}', 'PermissionController@update')->middleware('auth');
 Route::delete('/permissions/{permission}', 'PermissionController@destroy')->middleware('auth');
+//Roles
+Route::resource('/roles', 'RoleController')->middleware('auth');
 // Users
 // Route::get('/users', 'UsersController@index');
 // Route::get('/users/create', 'UsersController@create');
