@@ -18,5 +18,13 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'password' => Hash::make('admin'),
         ]);
+
+        DB::table('model_has_roles')->insert(
+            [
+                'role_id' => 1,
+                'model_type' => 'App\User',
+                'model_id' => 1
+            ]
+        );
     }
 }
