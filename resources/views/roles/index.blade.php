@@ -30,9 +30,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Data Roles</h4>
-                            <div class="card-header-action">
-                                <a href="{{ url('roles/create') }}" class="btn btn-icon btn-primary"><i class="fas fa-plus"></i></a>
-                            </div>
+                            @can('roles-create')
+                                <div class="card-header-action">
+                                    <a href="{{ url('roles/create') }}" class="btn btn-icon btn-primary"><i class="fas fa-plus"></i></a>
+                                </div>
+                            @endcan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -62,12 +64,16 @@
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <a href="{{ url('/roles/' .$role->id. '/edit') }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
-                                                <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $role->id }}').submit();"><i class="fas fa-times"></i></button>
-                                                <form id="delete-{{ $role->id }}" action="{{ url('/roles/' .$role->id) }}" method="post" style="display: none;">
-                                                    @method('delete')
-                                                    @csrf
-                                                </form>
+                                                @can('roles-update')
+                                                    <a href="{{ url('/roles/' .$role->id. '/edit') }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
+                                                @endcan
+                                                @can('roles-delete')
+                                                    <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $role->id }}').submit();"><i class="fas fa-times"></i></button>
+                                                    <form id="delete-{{ $role->id }}" action="{{ url('/roles/' .$role->id) }}" method="post" style="display: none;">
+                                                        @method('delete')
+                                                        @csrf
+                                                    </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                         @endforeach

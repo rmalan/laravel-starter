@@ -30,9 +30,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Data Permissions</h4>
-                            <div class="card-header-action">
-                                <button class="btn btn-icon btn-primary create-permission" data-toggle="modal" data-target="#dataModal"><i class="fas fa-plus"></i></button>
-                            </div>
+                            @can('permissions-create')
+                                <div class="card-header-action">
+                                    <button class="btn btn-icon btn-primary create-permission" data-toggle="modal" data-target="#dataModal"><i class="fas fa-plus"></i></button>
+                                </div>
+                            @endcan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -56,12 +58,16 @@
                                             <td class="text-center">{{ $no++ }}</td>
                                             <td>{{ $permission->name }}</td>
                                             <td>
-                                                <button class="btn btn-icon btn-warning edit-permission" data-toggle="modal" data-target="#dataModal" data-id="{{ $permission->id }}"><i class="far fa-edit"></i></button>
-                                                <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $permission->id }}').submit();"><i class="fas fa-times"></i></button>
-                                                <form id="delete-{{ $permission->id }}" action="{{ url('/permissions/' .$permission->id) }}" method="post" style="display: none;">
-                                                    @method('delete')
-                                                    @csrf
-                                                </form>
+                                                @can('permissions-update')
+                                                    <button class="btn btn-icon btn-warning edit-permission" data-toggle="modal" data-target="#dataModal" data-id="{{ $permission->id }}"><i class="far fa-edit"></i></button>
+                                                @endcan
+                                                @can('permissions-delete')
+                                                    <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $permission->id }}').submit();"><i class="fas fa-times"></i></button>
+                                                    <form id="delete-{{ $permission->id }}" action="{{ url('/permissions/' .$permission->id) }}" method="post" style="display: none;">
+                                                        @method('delete')
+                                                        @csrf
+                                                    </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                         @endforeach

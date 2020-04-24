@@ -30,9 +30,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>Data Users</h4>
-                            <div class="card-header-action">
-                                <a href="{{ url('users/create') }}" class="btn btn-icon btn-primary"><i class="fas fa-plus"></i></a>
-                            </div>
+                            @can('users-create')
+                                <div class="card-header-action">
+                                    <a href="{{ url('users/create') }}" class="btn btn-icon btn-primary"><i class="fas fa-plus"></i></a>
+                                </div>
+                            @endcan
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -68,12 +70,16 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ url('/users/' .$user->id. '/edit') }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
-                                                <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $user->id }}').submit();"><i class="fas fa-times"></i></button>
-                                                <form id="delete-{{ $user->id }}" action="{{ url('/users/' .$user->id) }}" method="post" style="display: none;">
-                                                    @method('delete')
-                                                    @csrf
-                                                </form>
+                                                @can('users-update')
+                                                    <a href="{{ url('/users/' .$user->id. '/edit') }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
+                                                @endcan
+                                                @can('users-delete')
+                                                    <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $user->id }}').submit();"><i class="fas fa-times"></i></button>
+                                                    <form id="delete-{{ $user->id }}" action="{{ url('/users/' .$user->id) }}" method="post" style="display: none;">
+                                                        @method('delete')
+                                                        @csrf
+                                                    </form>
+                                                @endcan
                                             </td>
                                         </tr>
                                         @endforeach
