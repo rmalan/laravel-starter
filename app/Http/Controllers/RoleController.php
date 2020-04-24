@@ -18,7 +18,6 @@ class RoleController extends Controller
     {
         $data['pageTitle'] = 'Roles';
         $data['roles'] = Role::all();
-        $data['permissions'] = Permission::join('role_has_permissions', 'role_has_permissions.permission_id', '=' ,'permissions.id')->get();
 
         return view('roles.index', $data);
     }
@@ -84,12 +83,9 @@ class RoleController extends Controller
         $data['pageTitle'] = 'Ubah Data Roles';
         $data['role'] = Role::find($id);
         $data['permissions'] = Permission::all();
-        $data['rolePermissions'] = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
-        ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-        ->all();
-        // dd(DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
-        // ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-        // ->all());
+        $data['rolePermissions'] = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)
+                                    ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
+                                    ->all();
 
         return view('roles.edit', $data);
     }

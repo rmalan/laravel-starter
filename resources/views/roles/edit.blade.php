@@ -32,7 +32,7 @@
                 <div class="col-12 col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Ubah Data Pengguna</h4>
+                            <h4>Ubah Data Roles</h4>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('/roles/' .$role->id) }}" class="needs-validation" novalidate="">
@@ -51,7 +51,12 @@
                                     <label>Permissions</label>
                                     <select class="form-control select2 @error('permissions') is-invalid @enderror"" name="permissions[]" multiple="">
                                         @foreach ($permissions as $permission)
-                                            <option value="{{ $permission->id }}" {{ in_array($permission->id, $rolePermissions) ? 'selected' : '' }} {{ (collect(old('permissions'))->contains($permission->id)) ? 'selected':'' }}>{{ $permission->name }}</option>
+                                            <option value="{{ $permission->id }}" 
+                                                @if(old('permissions'))
+                                                    {{ (in_array($permission->id, old('permissions')) ? 'selected' : '') }}
+                                                @else
+                                                    {{ in_array($permission->id, $rolePermissions) ? 'selected' : '' }}
+                                                @endif>{{ $permission->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('permissions')

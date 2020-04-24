@@ -57,7 +57,7 @@
                                             <td class="text-center">{{ $no++ }}</td>
                                             <td>{{ $role->name }}</td>
                                             <td>
-                                                @foreach ($permissions as $permission)
+                                                @foreach ($role->permissions as $permission)
                                                     <span class="badge badge-light">{{ $permission->name }}</span>
                                                 @endforeach
                                             </td>
@@ -79,7 +79,7 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>
 @endsection
 
 @section('script')
