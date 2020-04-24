@@ -16,7 +16,10 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@bkd.test',
             'username' => 'admin',
-            'password' => Hash::make('admin'),
+            'email_verified_at' => now(),
+            'password' => Hash::make('admin'),            
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
         DB::table('model_has_roles')->insert(
