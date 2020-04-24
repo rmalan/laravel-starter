@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -29,6 +31,7 @@ class UserController extends Controller
     public function create()
     {
         $data['pageTitle'] = 'Tambah Data Users';
+        $data['roles'] = Role::all();
 
         return view('users.create', $data);
     }
@@ -46,6 +49,7 @@ class UserController extends Controller
             'email' => ['required', 'string', 'email', 'unique:users'],
             'username' => ['required', 'string', 'max:20', 'unique:users'],
             'password' => ['required', 'string', 'confirmed'],
+            'role' => 'required',
         ];
 
         $customMessages = [
@@ -56,16 +60,18 @@ class UserController extends Controller
             'username.unique' => 'Nama pengguna telah digunakan!',
             'password.required' => 'Kata sandi belum diisi!',
             'password.confirmed' => 'Kata sandi tidak cocok!',
+            'role.required' => 'Role belum diisi!',
         ];
 
         $this->validate($request, $rules, $customMessages);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password)
         ]);
+        $user->assignRole($request->role);
 
         return redirect('/users')->with('message', 'Data telah ditambahkan');
     }
@@ -91,6 +97,8 @@ class UserController extends Controller
     {
         $data['pageTitle'] = 'Ubah Data Pengguna';
         $data['user'] = $user;
+        $data['roles'] = Role::all();
+        $data['userRole'] = User::find($user->id)->roles->pluck('name','name')->all();
 
         return view('users.edit', $data);
     }
@@ -108,7 +116,8 @@ class UserController extends Controller
             'name' => 'required',
             'email' => ['required', 'string', 'email', 'unique:users,email,' .$user->id],
             'username' => ['required', 'string', 'max:20', 'unique:users,username,' .$user->id],
-            'password' => ['required', 'string', 'confirmed'],
+            'password' => 'confirmed',
+            'role' => 'required',
         ];
 
         $customMessages = [
@@ -117,19 +126,22 @@ class UserController extends Controller
             'email.unique' => 'Email telah digunakan!',
             'username.required' => 'Nama pengguna belum diisi!',
             'username.unique' => 'Nama pengguna telah digunakan!',
-            'password.required' => 'Kata sandi belum diisi!',
             'password.confirmed' => 'Kata sandi tidak cocok!',
+            'role.required' => 'Role belum diisi!',
         ];
 
         $this->validate($request, $rules, $customMessages);
 
-        User::where('id', $user->id)
-            ->update([
+        DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+
+        $user = User::find($user->id);
+        $user->update([
                 'name' => $request->name,
                 'email' => $request->email,
                 'username' => $request->username,
                 'password' => Hash::make($request->password)
             ]);
+        $user->assignRole($request->role);
 
         return redirect('/users')->with('message', 'Data telah diubah');
     }
@@ -144,6 +156,6 @@ class UserController extends Controller
     {
         User::destroy($user->id);
 
-        return redirect('/users')->with('status', 'Data telah dihapus');
+        return redirect('/users')->with('message', 'Data telah dihapus');
     }
 }

@@ -10,8 +10,8 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item"><a href="{{ url('/users') }}">Pengguna</a></div>
-                <div class="breadcrumb-item active">Tambah Data Pengguna</div>
+                <div class="breadcrumb-item"><a href="{{ url('/users') }}">Users</a></div>
+                <div class="breadcrumb-item active">Tambah Data Users</div>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
                 <div class="col-12 col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Tambah Data Pengguna</h4>
+                            <h4>Tambah Data Users</h4>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('/users') }}" class="needs-validation" novalidate="">
@@ -108,6 +108,20 @@
                                         </div>
                                         <input name="password_confirmation" type="password" class="form-control pwstrength" data-indicator="pwindicator">
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select class="form-control selectric @error('role') is-invalid @enderror" name="role">
+                                        <option value=""> -- Pilih Role --</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}" {{ (collect(old('role'))->contains($role->name)) ? 'selected':'' }}>{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('role')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="fas fa-save"></i> Simpan</button>

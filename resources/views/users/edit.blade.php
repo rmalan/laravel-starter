@@ -10,8 +10,8 @@
         <div class="section-header">
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
-                <div class="breadcrumb-item"><a href="{{ url('/users') }}">Pengguna</a></div>
-                <div class="breadcrumb-item active">Tambah Data Pengguna</div>
+                <div class="breadcrumb-item"><a href="{{ url('/users') }}">Users</a></div>
+                <div class="breadcrumb-item active">Ubah Data Users</div>
             </div>
         </div>
 
@@ -109,6 +109,20 @@
                                         </div>
                                         <input name="password_confirmation" type="password" class="form-control pwstrength" data-indicator="pwindicator">
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select class="form-control selectric @error('role') is-invalid @enderror" name="role">
+                                        <option value=""> -- Pilih Role --</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}" {{ in_array($role->name, $userRole) ? 'selected' : '' }} {{ (collect(old('role'))->contains($role->name)) ? 'selected':'' }}>{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('role')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="fas fa-save"></i> Simpan</button>

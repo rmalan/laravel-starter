@@ -29,7 +29,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Data Pengguna</h4>
+                            <h4>Data Users</h4>
                             <div class="card-header-action">
                                 <a href="{{ url('users/create') }}" class="btn btn-icon btn-primary"><i class="fas fa-plus"></i></a>
                             </div>
@@ -45,6 +45,7 @@
                                             <th>Nama</th>
                                             <th>Email</th>
                                             <th>Nama Pengguna</th>
+                                            <th>Role</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -59,6 +60,13 @@
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->username }}</td>
+                                            <td>
+                                                @if(!empty($user->getRoleNames()))
+                                                    @foreach($user->getRoleNames() as $role)
+                                                        <span class="badge badge-light">{{ $role }}</span>
+                                                    @endforeach
+                                                @endif
+                                            </td>
                                             <td>
                                                 <a href="{{ url('/users/' .$user->id. '/edit') }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
                                                 <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $user->id }}').submit();"><i class="fas fa-times"></i></button>
