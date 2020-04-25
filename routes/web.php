@@ -16,20 +16,13 @@ use Illuminate\Support\Facades\Route;
 Auth::routes(['verify' => true]);
 
 Route::get('/', 'DashboardController@index')->middleware(['auth', 'verified']);
-// Permissions
 Route::get('/permissions', 'PermissionController@index')->middleware('auth');
 Route::post('/permissions', 'PermissionController@store')->middleware('auth');
 Route::get('/permissions/{id}', 'PermissionController@edit')->middleware('auth');
 Route::patch('/permissions/{permission}', 'PermissionController@update')->middleware('auth');
 Route::delete('/permissions/{permission}', 'PermissionController@destroy')->middleware('auth');
-//Roles
 Route::resource('/roles', 'RoleController')->middleware('auth');
-// Users
-// Route::get('/users', 'UsersController@index');
-// Route::get('/users/create', 'UsersController@create');
-// Route::get('/users/{user}', 'UsersController@show');
-// Route::post('/users', 'UsersController@store');
-// Route::delete('/users/{user}', 'UsersController@destroy');
-// Route::get('/users/{user}/edit', 'UsersController@edit');
-// Route::patch('/users/{user}', 'UsersController@update');
 Route::resource('/users', 'UserController')->middleware('auth');
+Route::get('/my-account', 'MyAccountController@show')->middleware('auth');
+Route::post('/my-account', 'MyAccountController@updateAccount')->middleware('auth');
+Route::post('/my-account/update-password', 'MyAccountController@updatePassword')->middleware('auth');
