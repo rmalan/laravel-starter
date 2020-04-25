@@ -1,22 +1,25 @@
-# Laravel CRUD
+# Laravel Starter
+Laravel Starter merupakan admin panel sederhana dengan menggunakan laravel dan juga terintegrasi dengan template [Stisla](https://getstisla.com/).
 
-Laravel CRUD sederhana yang juga terintegrasi dengan template [Stisla](https://getstisla.com/).
-
-## Teknologi
-Teknologi yang digunakan:
-- Laravel 7.4
-- MariaDB 10.3
+## Fitur
+- *Auth* (*register, verify, reset password, confirm password*)
+- *Roles* dan *permission* dengan `spatie/laravel-permission`
 
 ## *Requirements*
 - PHP >= 7.2.5
+- Git
 - Composer
 
 ## *Installing*
-Jalankan:
+- *Clone* repo:
+```
+git clone https://github.com/rmalan/laravel-starter.git
+```
+- Jalankan:
 ```
 $ composer install
 ```
-*Setup* file `.env`. Kemudian jalankan:
+- *Setup* file `.env` (db dan mail). Kemudian jalankan:
 ```
 $ php artisan key:generate
 $ php artisan migrate

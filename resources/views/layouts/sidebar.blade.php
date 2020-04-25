@@ -1,9 +1,9 @@
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}">Laravel CRUD</a>
+                        <a href="{{ url('/') }}">Laravel Starter</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
-                        <a href="{{ url('/') }}">LC</a>
+                        <a href="{{ url('/') }}">LS</a>
                     </div>
                     <ul class="sidebar-menu">
                         <li class="menu-header">Dashboard</li>
