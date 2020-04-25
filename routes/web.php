@@ -13,12 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes([
-    'register' => false,
-    'reset' => false
-]);
+Auth::routes(['verify' => true]);
 
-Route::get('/', 'DashboardController@index')->middleware('auth');
+Route::get('/', 'DashboardController@index')->middleware(['auth', 'verified']);
 // Permissions
 Route::get('/permissions', 'PermissionController@index')->middleware('auth');
 Route::post('/permissions', 'PermissionController@store')->middleware('auth');

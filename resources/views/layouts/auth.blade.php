@@ -30,7 +30,7 @@
                     @yield('content')
                     
                     <div class="simple-footer">
-                        Copyright &copy; Laravel CRUD {{ date('Y') }}
+                        Copyright &copy; <a href="{{ url('/') }}">Laravel CRUD</a> {{ date('Y') }}
                     </div>
                 </div>
             </div>

@@ -49,12 +49,28 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'username' => ['required', 'string', 'max:20', 'unique:users'],
-            'password' => ['required', 'string', 'confirmed'],
-        ]);
+        $rules = [
+            'name' => ['required'],
+            'email' => ['required', 'email', 'unique:users'],
+            'username' => ['required', 'max:20', 'unique:users'],
+            'password' => ['required', 'min:8', 'regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X]).*$/', 'confirmed'],
+        ];
+
+        $customMessages = [
+            'name.required' => 'Nama belum diisi!',
+            'email.required' => 'Email belum diisi!',
+            'email.email' => 'Email tidak valid!',
+            'email.unique' => 'Email telah digunakan!',
+            'username.required' => 'Nama pengguna belum diisi!',
+            'username.max' => 'Nama pengguna maksimal :max karakter!',
+            'username.unique' => 'Nama pengguna telah digunakan!',
+            'password.required' => 'Kata sandi belum diisi!',
+            'password.min' => 'Kata sandi minimal :min karakter!',
+            'password.regex' => 'Kata sandi harus mengandung huruf kapital, huruf kecil, dan angka!',
+            'password.confirmed' => 'Kata sandi tidak cocok!',
+        ];
+
+        return Validator::make($data, $rules, $customMessages);
     }
 
     /**
@@ -71,5 +87,7 @@ class RegisterController extends Controller
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // return $user->assignRole('administrator');
     }
 }
