@@ -38,7 +38,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $data['pageTitle'] = 'Tambah Data Users';
+        $data['pageTitle'] = 'Tambah Data User';
         $data['roles'] = Role::all();
 
         return view('users.create', $data);
@@ -103,7 +103,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $data['pageTitle'] = 'Ubah Data Pengguna';
+        $data['pageTitle'] = 'Ubah Data User';
         $data['user'] = $user;
         $data['roles'] = Role::all();
         $data['userRole'] = User::find($user->id)->roles->pluck('name','name')->all();

@@ -37,7 +37,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $data['pageTitle'] = 'Tambah Data Roles';
+        $data['pageTitle'] = 'Tambah Data Role';
         $data['permissions'] = Permission::all();
 
         return view('roles.create', $data);
@@ -88,7 +88,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        $data['pageTitle'] = 'Ubah Data Roles';
+        $data['pageTitle'] = 'Ubah Data Role';
         $data['role'] = Role::find($id);
         $data['permissions'] = Permission::all();
         $data['rolePermissions'] = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $id)

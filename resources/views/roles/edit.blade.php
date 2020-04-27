@@ -11,7 +11,7 @@
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item"><a href="{{ url('/roles') }}">Roles</a></div>
-                <div class="breadcrumb-item active">Tambah Data Roles</div>
+                <div class="breadcrumb-item active">Ubah Data Role</div>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
                 <div class="col-12 col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Ubah Data Roles</h4>
+                            <h4>Ubah Data Role</h4>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('/roles/' .$role->id) }}" class="needs-validation" novalidate="">

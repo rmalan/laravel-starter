@@ -11,7 +11,7 @@
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item"><a href="{{ url('/users') }}">Users</a></div>
-                <div class="breadcrumb-item active">Ubah Data Users</div>
+                <div class="breadcrumb-item active">Ubah Data User</div>
             </div>
         </div>
 
@@ -32,7 +32,7 @@
                 <div class="col-12 col-md-8">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Ubah Data Pengguna</h4>
+                            <h4>Ubah Data User</h4>
                         </div>
                         <div class="card-body">
                             <form method="POST" action="{{ url('/users/' .$user->id) }}" class="needs-validation" novalidate="">
