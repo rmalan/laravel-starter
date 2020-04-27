@@ -82,5 +82,4 @@
     <script src="{{ asset('assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
-    <script src="{{ asset('assets/js/page/forms-advanced-forms.js') }}"></script>
 @endsection
