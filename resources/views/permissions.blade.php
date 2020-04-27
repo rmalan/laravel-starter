@@ -62,11 +62,7 @@
                                                     <button class="btn btn-icon btn-warning edit-permission" data-toggle="modal" data-target="#dataModal" data-id="{{ $permission->id }}"><i class="far fa-edit"></i></button>
                                                 @endcan
                                                 @can('permissions-delete')
-                                                    <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $permission->id }}').submit();"><i class="fas fa-times"></i></button>
-                                                    <form id="delete-{{ $permission->id }}" action="{{ url('/permissions/' .$permission->id) }}" method="post" style="display: none;">
-                                                        @method('delete')
-                                                        @csrf
-                                                    </form>
+                                                    <button class="btn btn-icon btn-danger delete-permission" data-toggle="modal" data-target="#data-modal-delete" data-id="{{ $permission->id }}"><i class="fas fa-times"></i></button>
                                                 @endcan
                                             </td>
                                         </tr>
@@ -104,7 +100,31 @@
                 </form>
             </div>
         </div>
-    </div>    
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="data-modal-delete">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="#">
+                    @method('delete')
+                    @csrf
+                    <div class="modal-body">
+                        <p>Apakah Anda yakin akan menghapus data ini?</p>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="submit" class="btn btn-danger btn-shadow">Ya</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -124,7 +144,7 @@
             $('#nama').val('');
         });
 
-        $('.edit-permission').click(function(){
+        $('#datatable').on('click', '.edit-permission',function(){
             let id = $(this).data('id');
 
             $('.modal-title').html('Ubah Data Permission');  
@@ -140,6 +160,13 @@
                     $('#nama').val(data.permission.name);
                 }
             });
+        });
+
+        $('#datatable').on('click', '.delete-permission', function(){
+            let id = $(this).data('id');
+
+            $('.modal-title').html('Hapus Data Permission');
+            $('.modal-content form').attr('action', '{{ url('/permissions/') }}/' +id);
         });
     </script>
 @endsection
