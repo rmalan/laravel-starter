@@ -48,7 +48,7 @@ class MyAccountController extends Controller
     {
         $rules = [
             'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required', 'min:8', 'regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\X]).*$/'],
+            'new_password' => ['required', 'min:8', 'regex:/^.*(?=.{3,})(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[\d\x]).*$/'],
             'new_password_confirmation' => ['same:new_password'],
         ];
 
