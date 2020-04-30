@@ -114,7 +114,7 @@ class UsersController extends Controller
             'name' => 'required',
             'email' => ['required', 'string', 'email', 'unique:users,email,' .$user->id],
             'username' => ['required', 'string', 'max:20', 'unique:users,username,' .$user->id],
-            'password' => ['required', 'string', 'confirmed'],
+            'password' => ['confirmed'],
             'user_group' => 'required'
         ];
 
@@ -124,7 +124,7 @@ class UsersController extends Controller
             'email.unique' => 'Email telah digunakan!',
             'username.required' => 'Nama pengguna belum diisi!',
             'username.unique' => 'Nama pengguna telah digunakan!',
-            'password.required' => 'Kata sandi belum diisi!',
+            // 'password.required' => 'Kata sandi belum diisi!',
             'password.confirmed' => 'Kata sandi tidak cocok!',
             'user_group.required' => 'Grup pengguna belum dipilih!'
         ];
@@ -153,6 +153,6 @@ class UsersController extends Controller
     {
         User::destroy($user->id);
 
-        return redirect('/users')->with('status', 'Data telah dihapus');
+        return redirect('/users')->with('message', 'Data telah dihapus');
     }
 }

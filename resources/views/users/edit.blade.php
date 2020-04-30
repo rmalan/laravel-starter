@@ -11,7 +11,7 @@
             <h1>{{ $pageTitle }}</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item"><a href="{{ url('/users') }}">Pengguna</a></div>
-                <div class="breadcrumb-item active">Tambah Data Pengguna</div>
+                <div class="breadcrumb-item active">Ubah Data Pengguna</div>
             </div>
         </div>
 

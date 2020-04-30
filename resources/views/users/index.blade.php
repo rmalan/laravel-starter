@@ -63,11 +63,7 @@
                                             <td>{{ $user->userGroup->name }}</td>
                                             <td>
                                                 <a href="{{ url('/users/' .$user->id. '/edit') }}" class="btn btn-icon btn-warning"><i class="far fa-edit"></i></a>
-                                                <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $user->id }}').submit();"><i class="fas fa-times"></i></button>
-                                                <form id="delete-{{ $user->id }}" action="{{ url('/users/' .$user->id) }}" method="post" style="display: none;">
-                                                    @method('delete')
-                                                    @csrf
-                                                </form>
+                                                <button class="btn btn-icon btn-danger delete-user" data-toggle="modal" data-target="#data-modal-delete" data-id="{{ $user->id }}"><i class="fas fa-times"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -79,7 +75,31 @@
                 </div>
             </div>
         </div>
-    </section> 
+    </section>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="data-modal-delete">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="#">
+                    @method('delete')
+                    @csrf
+                    <div class="modal-body">
+                        <p>Apakah Anda yakin akan menghapus data ini?</p>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="submit" class="btn btn-danger btn-shadow">Ya</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -91,4 +111,11 @@
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('assets/js/page/modules-datatables.js') }}"></script>
+    <script>
+        $('#datatable').on('click', '.delete-user', function(){
+            let id = $(this).data('id');
+            $('.modal-title').html('Hapus Data Pengguna');
+            $('.modal-content form').attr('action', '{{ url('/users/') }}/' +id);
+        });
+    </script>
 @endsection

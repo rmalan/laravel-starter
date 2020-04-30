@@ -57,11 +57,7 @@
                                             <td>{{ $userGroup->name }}</td>
                                             <td>
                                                 <button class="btn btn-icon btn-warning edit-user-group" data-toggle="modal" data-target="#dataModal" data-id="{{ $userGroup->id }}"><i class="far fa-edit"></i></button>
-                                                <button class="btn btn-icon btn-danger" data-confirm="Yakin?|Apakah Anda yakin akan menghapus data ini?" data-confirm-yes="event.preventDefault(); document.getElementById('delete-{{ $userGroup->id }}').submit();"><i class="fas fa-times"></i></button>
-                                                <form id="delete-{{ $userGroup->id }}" action="{{ url('/user-groups/' .$userGroup->id) }}" method="post" style="display: none;">
-                                                    @method('delete')
-                                                    @csrf
-                                                </form>
+                                                <button class="btn btn-icon btn-danger delete-user-group" data-toggle="modal" data-target="#data-modal-delete" data-id="{{ $userGroup->id }}"><i class="fas fa-times"></i></button>
                                             </td>
                                         </tr>
                                         @endforeach
@@ -98,7 +94,31 @@
                 </form>
             </div>
         </div>
-    </div>    
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="data-modal-delete">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="#">
+                    @method('delete')
+                    @csrf
+                    <div class="modal-body">
+                        <p>Apakah Anda yakin akan menghapus data ini?</p>
+                    </div>
+                    <div class="modal-footer bg-whitesmoke br">
+                        <button type="submit" class="btn btn-danger btn-shadow">Ya</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -118,7 +138,7 @@
             $('#nama').val('');
         });
 
-        $('.edit-user-group').click(function(){
+        $('#datatable').on('click', '.edit-user-group',function(){
             let id = $(this).data('id');
 
             $('.modal-title').html('Ubah Data Grup Pengguna');  
@@ -134,6 +154,12 @@
                     $('#nama').val(data.userGroup.name);
                 }
             });
+        });
+
+        $('#datatable').on('click', '.delete-user-group', function(){
+            let id = $(this).data('id');
+            $('.modal-title').html('Hapus Data Grup Pengguna');
+            $('.modal-content form').attr('action', '{{ url('/user-groups/') }}/' +id);
         });
     </script>
 @endsection
