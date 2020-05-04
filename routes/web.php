@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
-Route::get('/', 'DashboardController@index')->middleware(['auth', 'verified']);
+Route::get('/', function() {
+    return redirect('/dashboard');
+});
+Route::get('/dashboard', 'DashboardController@index')->middleware(['auth', 'verified']);
 Route::get('/permissions', 'PermissionController@index')->middleware('auth');
 Route::post('/permissions', 'PermissionController@store')->middleware('auth');
 Route::get('/permissions/{id}', 'PermissionController@edit')->middleware('auth');
