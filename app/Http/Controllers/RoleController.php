@@ -138,6 +138,6 @@ class RoleController extends Controller
     {
         Role::destroy($id);
 
-        return redirect('/roles')->with('status', 'Data telah dihapus');
+        return redirect('/roles')->with('message', 'Data telah dihapus');
     }
 }
