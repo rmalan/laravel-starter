@@ -15,21 +15,20 @@
             </div>
         </div>
 
-        @if(session('message'))
-        <div class="alert alert-success alert-dismissible show fade">
+        @error('permissions')
+        <div class="alert alert-danger alert-dismissible show fade">
             <div class="alert-body">
                 <button class="close" data-dismiss="alert">
                     <span>×</span>
                 </button>
-                {{ session('message') }}
+                {{ $message }}
             </div>
         </div>
-        @endif
+        @enderror
 
         <div class="section-body">
             <div class="row">
-                <div class="col-12 col-md-2"></div>
-                <div class="col-12 col-md-8">
+                <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4>Ubah Data Role</h4>
@@ -48,22 +47,23 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label>Permissions</label>
-                                    <select class="form-control select2 @error('permissions') is-invalid @enderror"" name="permissions[]" multiple="">
-                                        @foreach ($permissions as $permission)
-                                            <option value="{{ $permission->id }}" 
+                                    <div class="control-label">Permissions</div>
+                                    <div class="row">
+                                    @foreach ($permissions as $permission)
+                                        <div class="col-md-3">
+                                            <label class="custom-switch mt-2">
+                                                <input type="checkbox" name="permissions[]" class="custom-switch-input" value="{{ $permission->id }}"
                                                 @if(old('permissions'))
-                                                    {{ (in_array($permission->id, old('permissions')) ? 'selected' : '') }}
+                                                    {{ (in_array($permission->id, old('permissions')) ? 'checked' : '') }}
                                                 @else
-                                                    {{ in_array($permission->id, $rolePermissions) ? 'selected' : '' }}
-                                                @endif>{{ $permission->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('permissions')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+                                                    {{ in_array($permission->id, $rolePermissions) ? 'checked' : '' }}
+                                                @endif>
+                                                <span class="custom-switch-indicator"></span>
+                                                <span class="custom-switch-description">{{ $permission->name }}</span>
+                                            </label>
                                         </div>
-                                    @enderror
+                                    @endforeach
+                                    </div>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-icon icon-left btn-primary"><i class="fas fa-save"></i> Simpan</button>
