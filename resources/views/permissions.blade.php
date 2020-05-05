@@ -91,7 +91,10 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label>Nama</label>
-                            <input id="nama" name="nama" type="text" class="form-control">
+                            <input id="nama" name="nama" type="text" class="form-control" onkeydown="return alphaOnly(event);" aria-describedby="nama-permission">
+                            <small id="nama-permission" class="form-text text-muted">
+                                Pisahkan dengan tanda minus (-)
+                            </small>
                         </div>
                     </div>
                     <div class="modal-footer bg-whitesmoke br">
@@ -168,5 +171,10 @@
             $('.modal-title').html('Hapus Data Permission');
             $('.modal-content form').attr('action', '{{ url('/permissions/') }}/' +id);
         });
+
+        function alphaOnly(event) {
+            let key = event.keyCode;
+            return ((key >= 65 && key <= 90) || key == 8 || key == 189);
+        };
     </script>
 @endsection

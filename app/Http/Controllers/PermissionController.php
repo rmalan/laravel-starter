@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
@@ -25,7 +26,7 @@ class PermissionController extends Controller
 
     public function store(Request $request)
     {
-        Permission::create(['name' => $request->nama]);
+        Permission::create(['name' => Str::lower($request->nama)]);
 
         return redirect('/permissions')->with('message', 'Data telah ditambahkan');
     }
@@ -42,7 +43,7 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         $permission = Permission::find($permission->id);
-        $permission->name = $request->nama;
+        $permission->name = Str::lower($request->nama);
         $permission->save();
 
         return redirect('/permissions')->with('message', 'Data telah diubah');
