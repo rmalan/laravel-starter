@@ -1,6 +1,6 @@
                 <aside id="sidebar-wrapper">
                     <div class="sidebar-brand">
-                        <a href="{{ url('/') }}">Laravel Starter</a>
+                        <a href="{{ url('/') }}">{{ config('app.name') }}</a>
                     </div>
                     <div class="sidebar-brand sidebar-brand-sm">
                         <a href="{{ url('/') }}">LS</a>
