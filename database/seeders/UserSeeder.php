@@ -1,6 +1,9 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -14,7 +17,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'Admin',
-            'email' => 'admin@bkd.test',
+            'email' => 'admin@laravel-starter.test',
             'username' => 'admin',
             'email_verified_at' => now(),
             'password' => Hash::make('admin'),            
@@ -25,7 +28,7 @@ class UserSeeder extends Seeder
         DB::table('model_has_roles')->insert(
             [
                 'role_id' => 1,
-                'model_type' => 'App\User',
+                'model_type' => 'App\Models\User',
                 'model_id' => 1
             ]
         );
