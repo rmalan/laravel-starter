@@ -140,18 +140,32 @@ class UserController extends Controller
 
         $this->validate($request, $rules, $customMessages);
 
-        DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+        if ($request->password == null) {
+            DB::table('model_has_roles')->where('model_id', $user->id)->delete();
 
-        $user = User::find($user->id);
-        $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'username' => $request->username,
-                'password' => Hash::make($request->password)
-            ]);
-        $user->assignRole($request->role);
+            $user = User::find($user->id);
+            $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'username' => $request->username,
+                ]);
+            $user->assignRole($request->role);
 
-        return redirect('/users')->with('message', 'Data telah diubah');
+            return redirect('/users')->with('message', 'Data telah diubah');
+        } else {
+            DB::table('model_has_roles')->where('model_id', $user->id)->delete();
+
+            $user = User::find($user->id);
+            $user->update([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'username' => $request->username,
+                    'password' => Hash::make($request->password)
+                ]);
+            $user->assignRole($request->role);
+
+            return redirect('/users')->with('message', 'Data telah diubah');
+        }
     }
 
     /**
