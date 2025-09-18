@@ -6,7 +6,7 @@ Laravel Starter merupakan admin panel sederhana dengan menggunakan laravel dan j
 - *Roles* dan *permission* dengan `spatie/laravel-permission`
 
 ## *Requirements*
-- PHP >= 7.2.5
+- PHP >= 8.2
 - Git
 - Composer
 
